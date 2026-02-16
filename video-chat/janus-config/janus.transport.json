@@ -1,0 +1,10 @@
+{
+  "http": {
+    "enabled": true,
+    "port": 8088
+  },
+  "websockets": {
+    "enabled": true,
+    "port": 8188
+  }
+}

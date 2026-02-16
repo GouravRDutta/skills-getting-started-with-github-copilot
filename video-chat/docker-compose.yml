@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  janus:
+    image: canyan/janus-gateway:latest
+    container_name: janus
+    ports:
+      - "8088:8088"
+      - "8188:8188"
+      - "10000-10200:10000-10200/udp"
+    volumes:
+      - ./janus-config/janus.jcfg:/etc/janus/janus.jcfg
+      - ./janus-config/janus.plugin.videoroom.jcfg:/etc/janus/janus.plugin.videoroom.jcfg
+      - ./janus-config/janus.transport.http.jcfg:/etc/janus/janus.transport.http.jcfg
+      - ./janus-config/janus.transport.websockets.jcfg:/etc/janus/janus.transport.websockets.jcfg
+    restart: unless-stopped
+
+  coturn:
+    image: instrumentisto/coturn:4.5.2
+    container_name: coturn
+    ports:
+      - "3478:3478/udp"
+      - "3478:3478"
+    environment:
+      - EXTERNAL_IP=127.0.0.1
+    restart: unless-stopped

@@ -1,0 +1,7 @@
+{
+  "general": {
+    "enabled": true,
+    "port": 8088,
+    "secure": false
+  }
+}

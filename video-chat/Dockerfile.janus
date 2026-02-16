@@ -1,0 +1,42 @@
+FROM debian:bookworm-slim
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    pkg-config \
+    git \
+    libmicrohttpd-dev \
+    libjansson-dev \
+    libssl-dev \
+    libsrtp2-dev \
+    libsofia-sip-ua-dev \
+    libglib2.0-dev \
+    libopus-dev \
+    libogg-dev \
+    libcurl4-openssl-dev \
+    liblua5.3-dev \
+    libconfig-dev \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /tmp
+
+# Download and build Janus
+RUN git clone https://github.com/meetecho/janus-gateway.git && \
+    cd janus-gateway && \
+    git checkout v1.0.0 && \
+    ./autogen.sh && \
+    ./configure --prefix=/opt/janus && \
+    make && \
+    make install && \
+    make install-plugins && \
+    cd /tmp && \
+    rm -rf janus-gateway
+
+# Copy configs
+COPY janus-config/ /opt/janus/etc/janus/
+
+EXPOSE 7088 8188 10000-10200/udp
+
+WORKDIR /opt/janus
+
+CMD ["/opt/janus/bin/janus", "-F", "/opt/janus/etc/janus"]

@@ -1,0 +1,35 @@
+/*
+ * Minimal janus.jcfg for video chat scaffold with Janus SFU.
+ * For full reference, see Janus documentation.
+ */
+
+/* Debug level: 'none', 'fatal', 'err', 'warn', 'info', 'dbg', 'vdbg' */
+debug_level = "info"
+
+/* HTTP API transport */
+http = true
+port = 8088
+
+/* WebSocket transport */
+websockets = true
+ws_port = 8188
+
+/* Daemon mode */
+daemonize = false
+
+/* Logging */
+log_stdout = true
+
+/* Session timeout (seconds) */
+session_timeout = 3600
+
+/* STUN/TURN for media connection */
+stun_server = "stun.l.google.com"
+stun_port = 19302
+
+/* Optional: TURN server for NAT traversal */
+/* turn_server = "coturn" */
+/* turn_port = 3478 */
+/* turn_transport = "udp" */
+
+

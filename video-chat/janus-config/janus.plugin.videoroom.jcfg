@@ -1,0 +1,17 @@
+/*
+ * Janus VideoRoom plugin configuration
+ * Reference: https://github.com/meetecho/janus-gateway/blob/master/conf/janus.plugin.videoroom.jcfg.sample
+ */
+
+/* Admin API secret (optional, for admin commands) */
+/* admin_key = "your_secret_admin_key" */
+
+/* Room definitions */
+room-{
+  room_id = 1234
+  description = "Default Video Chat Room"
+  publishers = 10
+  bitrate = 1000000
+  fir_freq = 10
+  record = false
+}
